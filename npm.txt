@@ -1,0 +1,90 @@
+npm init 创建package.json文件
+
+
+
+MAJOR.MINOR.PATCH, 意为 主版本号.小版本号.修订版本号.
+MAJOR 对应大的版本号迭代，做了不兼容旧版的修改时要更新 MAJOR 版本号
+MINOR 对应小版本迭代，发生兼容旧版API的修改或功能更新时，更新MINOR版本号
+PATCH 对应修订版本号，一般针对修复 BUG 的版本号
+^2.2.1	  	  指定的 MAJOR 版本号下, 所有更新的版本	  匹配 2.2.3, 2.3.0; 不匹配 1.0.3, 3.0.1
+~2.2.1	  	  指定 MAJOR.MINOR 版本号下，所有更新的版本	  匹配 2.2.3, 2.2.9 ; 不匹配 2.3.0, 2.4.5
+>=2.1	  	  版本号大于或等于 2.1.0			  匹配 2.1.2, 3.1
+<=2.2	  	  版本号小于或等于 2.2			  匹配 1.0.0, 2.2.1, 2.2.11
+1.0.0 - 2.0.0    版本号从 1.0.0 (含) 到 2.0.0 (含)	  匹配 1.0.0, 1.3.4, 2.0.0
+
+npm5 package.json package-lock.json 解决不同环境由于更新带来的依赖包版本不一样的问题
+提交package.json package-lock.json到git上，不能提交node_modules
+
+升级依赖包
+升级小版本 npm update
+升级大版本 npm install <package-name>@<version>
+或者手动修改package.json 并且执行npm install
+
+降级依赖包
+npm install <package-name>@<old-version>
+手动修改package.json无效，因为会安装package-lock.json中的版本
+
+删除依赖包
+npm uninstall <package>
+手动删除package.json中的依赖字段，并执行npm install
+
+
+
+npm scripts
+{
+    "scripts": {
+        "echo": "echo HELLO WORLD"
+    }
+}
+npm run echo	执行"echo”后的脚本
+
+
+
+
+node_modules/.bin
+依赖目录中安装的可供调用的命令行包，例如npm scripts中就可以使用这些命令
+{
+    "bin": {
+        "webpack": "./bin/webpack.js" 
+    }
+}
+webpack就是node_modules/.bin中的命令行包，npm install时会分析这个bin字段然后将./bin/webpack.js安装到node_modules/.bin目录中
+将项目依赖的命令行工具安装到项目依赖文件夹中，然后通过 npm scripts 调用；而非全局安装
+
+
+
+npm config
+npm config ls -l 查看所有配置
+proxy，registry默认https://registry.npmjs.org/，下载安装包时的源
+package-lock指定是否使用这个文件
+
+npmrc 优先级由高到低
+工程内配置文件: /path/to/my/project/.npmrc 可以在团队间共享npm运行相关配置
+用户级配置文件: ~/.npmrc
+全局配置文件: $PREFIX/etc/npmrc (即npm config get globalconfig 输出的路径)
+npm内置配置文件: /path/to/npm/npmrc
+
+
+
+node版本约束
+建议性约束
+{
+    "engines": {
+        "node": ">= 6.0.0",
+        "npm": ">= 3.0.0"
+    }
+}
+
+
+
+name - 包名。
+version - 包的版本号。
+description - 包的描述。
+homepage - 包的官网 url 。
+author - 包的作者姓名。
+contributors - 包的其他贡献者姓名。
+dependencies - 依赖包列表。如果依赖包没有安装，npm 会自动将依赖包安装在 node_module 目录下。
+repository - 包代码存放的地方的类型，可以是 git 或 svn，git 可在 Github 上。
+main - main 字段指定了程序的主入口文件，require('moduleName') 就会加载这个文件。这个字段的默认值是模块根目录下面的 index.js。
+keywords - 关键字
+

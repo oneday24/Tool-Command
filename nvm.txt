@@ -1,0 +1,5 @@
+nvm ls
+nvm ls-remote
+nvm install [-s] <version>
+nvm use [--silent] <version>
+

@@ -1,0 +1,112 @@
+https://git-scm.com/book/zh/v2  git学习网站
+http://mvnrepository.com        maven库
+
+
+git init
+git log 查看提交的说明信息
+git log -p -1 显示最近一次提交的详情
+git show ‘commit’ 查看某次提交的内容
+
+pull-requests教程网站
+http://github.com/guides/pull-requests
+
+forking a repo
+https://help.github.com/articles/fork-a-repo/
+
+1、git clone http://10.100.30.204/zengjing/hagrid.git
+项目克隆后，默认远程的别名为origin，是我们自己分支的代码
+
+———设置fork和上游代码库地址———
+2、git remote -v 
+查看当前设置的远程仓库的fork的地址
+origin    http://10.100.30.204/zengjing/hagrid.git (fetch)
+origin    http://10.100.30.204/zengjing/hagrid.git (push)
+3、git remote add upstream http://10.100.30.204/sagittarius/hagrid.git
+添加远程仓库，后面两个参数分别代表name和url
+增加上游代码库的remote源，再使用步骤2，就能看到四条信息，该操作只需操作一次
+origin    http://10.100.30.204/zengjing/hagrid.git (fetch)
+origin    http://10.100.30.204/zengjing/hagrid.git (push)
+upstream  http://10.100.30.204/sagittarius/hagrid.git (fetch)
+upstream  http://10.100.30.204/sagittarius/hagrid.git (push)
+
+———同步操作———
+4、git fetch upstream
+从上游仓库中获取代码，会放入本地的分支中，upstream/master
+5、git checkout master
+切换刚创建的分支
+6、git merge upstream/master
+将上游代码分支和你本地分支的代码合并
+
+———提交操作———
+5、git add
+添加要提交的文件
+6、git commit -m “message”
+提交
+7、git push origin master(分支名)
+将本地修改提交
+
+
+分支操作
+git branch 查看本地分支
+git branch -r 查看远程分支 返回的是origin/分支名类似的
+git branch -a 查看所有分支
+git branch -v 查看各个分支最后一个提交对象的信息
+git branch --merged 查看哪些分支已被并入当前分支
+
+git branch <branchName> 创建本地分支
+git checkout <branchName>切换本地分支
+git checkout -b <branchName> 在本地创建一个分支并切换到该分支
+git branch -d <branchName> 切换到其它分支，执行该命令可以删除branchName本地分支
+git branch -m <oldName> <newName> 重命名本地分支
+git push origin <branchLocal> 将你本地创建的分支推送到远端服务器
+git push origin --delete <branchRemote> 删除远程分支
+git checkout -b <branchLocal> <branchRemote> 将远程的其它分支代码获取下来，-b确保本地分支名不存在时也能创建
+
+git diff <source_branch> <target_branch> <path>在合并改动之前，你可以使用如下命令预览差异
+git merge <branch> 合并其他分支到你的当前分支
+git checkout [branch] -- [file name]从其它分支提取文件
+git checkout -- <filename>此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到暂存区的改动以及新文件都不会受到影响。
+
+rebase可以衍合尚未提交的commit
+git rebase master 回到两个分支共同祖先，根据当前分支的历次提交对象，生成补丁，然后以master分支最后一个提交对象为出发点，添加补丁文件，使当前分支为master分支的直接下游，再回到master分支，进行merge
+git rebase master branch1，效用如上，但是不需要切换分支
+
+git pull = git fetch origin && git merge origin/master
+
+tag操作
+git tag -a v2.1.1 -m “2.1.1版本，修改了提示框以及gps以及分期数显示”
+git push origin v2.1.1 向远端推送分支
+git tag  显示本地tag 结果为：xdxzy_v2.1.5_20161010
+git tag -d xdxzy_v2.1.5_20161010  删除本地tag
+git push origin :refs/tags/xdxzy_v2.1.5_20161010  用push, 删除远程tag
+
+
+git pull失败时的操作
+1、git stash
+2、git pull
+3、代码里解决冲突
+4、git stash pop
+5、再add，commit， push
+
+
+git diff spider-android-STLiveness spider-android-face YiXueDai/app/src/main/java/com/creditease/yixuedai/view/widget/StatusCircleView
+
+
+写message，需要英文输入法模式下，才能正常打印:wq退出
+
+删除远程分支
+git push origin --delete <branchName>
+合并其他分支到本地分支，如果要合并远程分支，则需要填写远程分支名，通过git branch -r得到
+git merge <branch> 
+删除tag这么用
+git push origin --delete tag <tagname>
+
+
+git pull <remote> <branch> 从远端remote分支拉取
+git branch --set-upstream-to=origin/<branch> develop-v1.0.0
+设置拉取到本地的上游分支
+
+会退到某个版本
+git log
+git reset —hard xxxx
+git push -f -u xxx(分支名称)

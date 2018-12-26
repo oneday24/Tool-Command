@@ -1,0 +1,35 @@
+快捷键
+shift + command + T 将编辑器里的文件制作成纯文本 txt
+
+截屏
+command + shift + 3
+command + shift + 4 
+      
+command + option + esc强制退出应用程序
+command+Q退出
+
+常用命令
+rm -rf filename
+ls -lo / 进入unix目录
+/usr目录安装了许多配置文件
+
+vi 命令
+进入vi后是command mode
+切换到插入模式Insert mode才能编辑：i光标当前位置
+a光标所在位置下一位置
+o插入新德一行，从行首输入
+’于插入模式只能一直输入文字，发现输错了，要按esc进入command mode删除
+：进入last line mode
+：w filename 保存
+：wq 存盘退出
+：ql 不存盘强制退出
+
+source .bash_profile
+环境变量
+如果Permission denied
+sudo chmod 755 /Users/zengjing/develop_tool/apache-tomcat-7.0.67/bin/startup.sh
+
+安装tomcat
+zip包
+
+intelli idea u http://idea.lanyus.com/    license server

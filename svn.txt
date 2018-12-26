@@ -1,0 +1,39 @@
+svn checkout http://192.168.101.19/svn/yixuedaiAPP/projectName/trunk/yxd/doc/
+下载下来的文件带目录
+
+svn delete filename cd到要删除的文件及文件夹的位置，然后执行此命令可以删除
+
+svn —version
+
+svn update 更新全部
+
+svn commit -m "LogMessage"
+
+svn log path 
+
+
+mac eclipse svn
+官网下载
+1、http://subclipse.tigris.org/update_1.8.x
+2、文件夹，content.jar，安装，可能会很慢
+官网下载 macports，http://www.macports.org/install.php
+运行命令 sudo port install subversion-javahlbindings +no_bdb +universal
+
+mat
+http://download.eclipse.org/mat/1.5/update-site/
+
+
+
+1，创建一个分支 
+svn copy svn://xx.com/repo/trunk svn://xx.com/repo/branches/TRY-something -m 'make branches TRY-something' 
+
+2，把工作目录转到分支 
+svn switch svn://xx.com/repo/branches/TRY-something 
+
+当然，也可以再转到主干svn switch svn://xx.com/repo/trunk 
+
+
+
+Error:svn: E165001: Commit failed (details follow):
+svn: E165001: Commit blocked by pre-commit hook (exit code 1) with output:
+You are not allowed delete files or directories!

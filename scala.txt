@@ -1,0 +1,7 @@
+OS: mac
+IDE: IntelliJ IDEA
+Java Version: 1.8
+Scala Version: 2.11.8
+SBT Version: 
+Typesafe Activator Version: 1.3.6(完整版本,400多MB,包含很多库,不是minimal）
+Play Framework Version: 2.3.9(为什么不用最新的2.4.3,请耐心看完)

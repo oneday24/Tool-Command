@@ -1,0 +1,136 @@
+快捷键
+ctrl+N 打开class
+ctrl+shift+N 打开文件
+ctrl+空格 补全
+alt+F7 查找关键词
+ctrl+Q 查看说明文档和注释
+ctrl+B 转到定义或使用
+ctrl+F12 class中的变量、方法等
+shift+F6 重命名所有的
+ctrl+O  override
+ctrl+I  implement
+ctrl+shift+F 查找引用 
+alt + enter import补全
+option + command + L 格式化代码
+cmd+7打开的类的结构图
+
+
+
+
+
+
+android打包
+storeFile file("puhui_release.keystore")
+storePassword "Q8LtTQHb3ROUtnE5ZFFAKnVbWwWKIe4G"
+keyAlias "puhui"
+keyPassword 'L9vTTvq1J2eAXSBbJv5U67HMZZtAnHHG'
+内存分析：http://www.jianshu.com/p/c49f778e7acf
+
+
+
+
+
+
+androidstudio环境搭建问题
+1、项目不能运行，运行按钮为灰色
+原因：开发环境没搭好，sdk没有下载齐全，所以依赖包下载不了
+2、显示gradle下载不了的时候，在gradle/wrapper/xxxxxx.properties中把https修改为http
+手动下载http://services.gradle.org/distributions，然后再preference里面配置gradle路径
+3、有时打开项目，没有目录，则需要使用import导入，然后下次打开就没问题了
+4、运行app时出现scanning files to index时，需要关掉monitor或者拔掉手机测试机等
+5、android studio svn说什么working copy format错误时，只要删除掉，然后重新下载，选择低版本的format即可
+6、release模式下打包，经常错误，主要原因在于混淆后，找不到方法了，所以要在混淆配置文件中keep保留
+7、viewpager占满全屏的问题：自定义view pager，获得子view的高度，然后设置子view的高度为view pager的高度
+8、使用lint，analyze inspect code
+9、jd-gui：java反编译工具
+10、volley超时时间，重复提交问题，应该把超时时间设置得比服务端的时间大，并且retry设置为-1
+11、bitmap在activity被finish后，也不一定会被回收，所以要手动recycle，并置为null
+
+
+
+
+Android 开发，配置 adb 变量，如下: 
+1. 启动终端Terminal 
+2. 输入 cd ~
+3. 输入 echo $HOME 
+4. 创建.bash_profile, 可使用 vi .bash_profile (如果已存在，则自动编辑；如不存在，则自动新建)
+5. 输入 export PATH=${PATH}: <1> : <2>(其中红字为必须输入，<1> <2>之间用分号相隔，为Android SDK下的 tools 目录路径，为Android SDK下的 platform-tools 目录路径<使用pwd可以直接显示路径全称>)
+6. 按 esc 键 --> :q! 保存该文件。 
+7. 输入 source .bash_profile 更新刚配置的环境变量。
+8. 验证配置是否成功 adb shell 
+
+
+
+
+traceview使用：
+Debug.startMethodTracing(“filename”)；   //开始
+Debug.stopMethodTracing()；  //结束
+文件放在了手机的sd卡中
+在android studio终端中，
+1、adb shell
+2、ls sdcard/ 查看文件是否生成
+3、exit返回
+4、adb pull sdcard/filename.trace /Users/zengjing/filename.trace
+5、traceview /Users/zengjing/filename.trace
+
+
+
+
+adb命令
+1.adb devices 查看连接到电脑的手机
+2.adb install xxx.apk
+3.adb logcat
+4.adb -d logcat com.creditease.chuangxin.xuedai
+5.adb pull sdcard/filename.trace /Users/zengjing/filename.trace
+
+
+
+
+Android Gradle配置
+下载地址：http://www.gradle.org/get-started
+解压缩包
+在.bash_profile中配置环境变量
+
+./gradlew -v 版本号
+./gradlew clean 清除9GAG/app目录下的build文件夹
+./gradlew build 检查依赖并编译打包
+./gradlew assembleDebug 编译并打Debug包
+./gradlew assembleRelease 编译并打Release的包
+./gradlew assembleWandoujiaRelease多渠道打包
+
+
+
+
+Monkey命令
+adb shell monkey -p com.creditease.checkcars --ignore-crashes --ignore-timeouts --ignore-security-exceptions --monitor-native-crashes  --pct-touch 70  --pct-appswitch 20 --pct-majornav 10  -v -v -v 1000000 > E:/monkey_log/java_monkey_log.txt
+ 
+以下是对所有参数的解释
+ 
+-s：指定产生随机事件种子值，相同的种子值产生相同的事件序列。如： -s 200
+--throttle：每个事件结束后的间隔时间——降低系统的压力（如不指定，系统会尽快的发送事件序列）。如：--throttle 100
+--pct-touch：指定触摸事件的百分比，如：--pct-touch 50 即50%，
+相关的还有以下option：
+--pct-motion <percent> （滑动事件）、
+--pct-trackball <percent> （轨迹球事件） 、
+--pct-nav <percent> （导航事件 up/down/left/right）、
+--pct-majornav <percent> (主要导航事件 back key 、 menu key)、
+--pct-syskeys <percent> (系统按键事件 Home 、Back 、startCall 、 endCall 、 volumeControl)、
+--pct-appswitch <percent> （activity之间的切换）、
+--pct-anyevent <percent>（任意事件）
+
+
+
+Android MAT 使用
+1、Android studio 左侧Captures工具栏获取prof文件，在log的Memory左侧有Dump Java Heap按钮，捕获前点击Initiate GC
+2、MAT中Histogram的主要作用是查看自己创建的类的实例的个数，thread_overview查看thread信息
+3、使用bitmap时，要在不显示bitmap时及时recycle，在onDestroy中也要
+4、点击QQL图标，在窗口输入select * from instanceof android.app.Activity并按Ctrl + F5或者!按钮，发现泄露了许多的activity
+
+Android反编译apk
+1、java环境
+2、在http://go.icpcw.com/e/15app.htm下载apktool，解压aptool.jar到c:windows
+，解压apktool-install-windows.zip到任意文件夹下
+3、转到apktool-install-windows文件夹下，执行命令apktool d xxx.apk filename
+4、打开filename文件夹，在res中找到main.xml，修改代码
+5、执行命令apktool b filename后，可在filenamedistout.apk找到新生成的apk
+6、最后用APKsign等工具为APK文件签名

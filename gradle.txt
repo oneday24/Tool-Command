@@ -1,0 +1,32 @@
+http://tools.android.com/tech-docs/new-build-system/user-guide
+
+
+Android Gradle配置
+下载地址：http://www.gradle.org/get-started
+解压缩包
+在.bash_profile中配置环境变量
+
+./gradlew -v 版本号
+./gradlew clean 清除9GAG/app目录下的build文件夹
+./gradlew build 检查依赖并编译打包
+./gradlew assembleDebug 编译并打Debug包
+./gradlew assembleRelease 编译并打Release的包
+./gradlew assembleWandoujiaRelease多渠道打包
+
+在idk的bin目录下运行以下命令可以生成keystore
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+
+android打包：
+1、build.gradle文件中配置（一般已经配置好了，只需要替换keystore在你电脑上的位置）
+signingConfigs {
+    releaseConfig {
+        storeFile file('/Users/zengjing/develop_file/xuedai2/签名/puhui_release.keystore')//keystore地址
+        //在命令行中输入密码等参数
+        storePassword System.console().readLine("\nstorePassword: ")//Q8LtTQHb3ROUtnE5ZFFAKnVbWwWKIe4G
+        keyAlias System.console().readLine("\nkeyAlias: ")//puhui
+        keyPassword System.console().readLine("\nKey password: ")//L9vTTvq1J2eAXSBbJv5U67HMZZtAnHHG
+    }
+}
+2、cd 到你的项目目录android下
+3、运行打包命令./gradle assembleRelease
+4、在android/app/build/outputs/apk/app-release.apk目录中就能找到你的apk

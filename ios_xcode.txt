@@ -1,0 +1,108 @@
+	1	第一步，精读 Stephen G. Kochan 的《Objective-C程序设计》：Objective-C语言基础，iOS开发的第一技能就是精通Objective-C；
+	2	第二步，有了语言基础，精读 David Mark 的《精通iOS开发》：通过各种单独的项目，熟悉iOS SDK，XCode开发环境，明白MVC、委托等设计模式，通读完后，你就对iOS SDK有了比较全面的认识，各种框架和组件有了一定的认识；
+	3	选择性阅读了Matt Neubury 的《iOS程序设计》：本书是iOS最系统的教程，对iOS框架的底层有比较详细的介绍，深刻了我对iOS的理解。如果你是一名不仅仅想使用iOS SDK开发，还想理解底层是怎么运行实现的，那就阅读它。如果没看David Mark的《精通iOS开发》直接阅读这本教程会非常的吃力和枯燥无味，所以我建议在学习的过程中，把它作为资料库来查询，遇到想深入学习的某一方面，就选择性阅读本书的一些章节；
+	4	有了上面的一些知识，研究一些github上的优秀的项目或者从cocoaChina上找些感兴趣的代码推荐内容并且阅读源码，最好还可以在自己的DIY项目中使用上它们。还可以阅读Bear Cahill 的《iOS in Practice》：通过9个上架的应用，加深对iOS SDK的认识和理解；
+	5	到这时候，就会遇到瓶颈，希望更上一层楼。我自己的做法是通过看公开课或者网上的开发视频，不是让你重新学习，因为身边没人带，所以这么做让你看到别人是怎么编码，别人的编程思路是什么，并且能将你前段时间学习的内容进一步巩固。
+	6	接下来当然是iOS进阶了。可以开始阅读David Mark的另一本畅销书《iOS6开发进阶与实战》，主要深入讲解了Core data，map Kit，Game Kit，iCloud，iOS安全等。
+	7	在第5和第6步的过程中，可以一点一点阅读Matt Galloway 的《Effective Objective-C 2.0》：介绍52个编写高质量IOS与OS X代码的方法；
+	8	与此同时，要学会使用下面一些网站和工具，学会使用这些网站和工具，才能是你的开发之路可持续发展：1.GitHub 路 Build software better, together. 2.Ray Wenderlich 3.Phabricator 4.Stack Overflow 等等。
+
+
+
+iphone UI
+iPhone6plus 5.5 1920*1080 401ppi
+iphone6     4.7 1334*750  326ppi
+ipone5s     4.0 1136*640  326ppi
+iphone5c    4.0 1136*640  326ppi
+
+真机测试基础知识：
+1、Certification(证书)
+证书是对电脑开发资格的认证，每个开发者帐号有一套，分为两种
+1）Developer Certification(开发证书)
+安装在电脑上提供权限：开发人员通过设备进行真机测试。可以生成副本供多台电脑安装。
+2）Distribution Certification(发布证书)
+安装在电脑上提供发布iOS程序的权限：开发人员可以制做测试版和发布版的程序。不可生成副本，仅有配置该证书的电脑才可使用。
+2、Provisioning Profile(授权文件)
+授权文件是对设备如iPod Touch、iPad、iPhone的授权，文件内记录的是设备的UDID和程序的App Id，即使被授权的设备可以安装或调试Bundle identifier与授权文件中记录的App Id对应的程序。
+开发者帐号在创建授权文件时候会选择App Id，（开发者帐号下App Id中添加，单选）和UDID（开发者帐号下Devices中添加最多100个，多选）。
+授权文件分为两种，对应相应的证书使用：
+1)    Developer Provisioning Profile(开发授权文件)
+在装有开发证书或副本的电脑上使用，开发人员选择该授权文件通过电脑将程序安装到授权文件记录的设备中，即可进行真机测试。
+注意：确保电脑有权限真机调试，即安装了开发证书或副本；在开发工具中程序的Bundle identifier和选中使用的授权文件的App Id要一致；连接调试的设备的UDID在选中的授权文件中有记录。
+2)    Distribution Provisioning Profile(发布授权文件)
+在装有发布证书的电脑上（即配置证书的电脑，只有一台）制做测试版和发布版的程序。
+发布版就是发布到App Store上的程序文件，开发者帐号创建授权文件时选择store选项，选择App Id，无需选择UDID；
+测试版就是在发布之前交给测试人员可同步到设备上的程序文件，开发者帐号创建授权文件时选择AdHoc，选择App Id和UDID；只有选中的UDID对应的设备才可能安装上通过该授权文件制做的程序。
+3、Keychain(开发密钥)
+安装证书成功的情况下证书下都会生成Keychain，上面提到的证书副本就是通过配置证书的电脑导出Keychain（就是.p12文件）安装到其他机子上，让其他机子得到证书对应的权限。Developer Certification就可以制做副本Keychain分发到其他电脑上安装，使其可以进行真机测试。Certification(证书)
+
+
+问题集锦：
+1、添加图片，显示不了，原因在于我是直接把图片放在Image.xcaset文件夹里，然后修改Content.json文件，需要在xcode里拖动图片文件到那个框里。
+2、xcode6创建手动编写ui的项目
+删除storyboard和launchnib两个文件，并且在infolist中删除相关的条目
+项目属性 app icons and launch image里，点击use asset catalog 选择migrate
+3、很多项目使用了cocoa pod，需要配置安装，然后运行pod install --verbose --no-repo-update这个命令
+$ sudo gem install cocoapods
+
+安装不了，因为被墙，换源
+$ gem sources -l  
+$ gem sources --remove https://rubygems.org/  
+//等有反应之后再敲入以下命令  
+$ gem sources -a http://ruby.taobao.org/ 
+sudo gem install cocoapods//安装cocoapods
+$ pod setup
+pod search AFNetworking 搜索AFNetworking是否支持Cocoapods
+创建pod项目的步骤
+1、先创建正常项目
+2、cd到项目目录下
+3、vim Podfile //创建Podfile文件
+4、然后在Podfile下输入
+ platform:iOS,’7.0’
+   pod “AFnetworking”, “~> 2.0”
+5、:wq保存退出
+6、pod install
+7、如果有pod项目，导入时，执行pod update
+
+pod file编写
+platform :ios, '8.0'
+#use_frameworks!个别需要用到它，比如reactiveCocoa
+
+def pods
+  pod 'AFNetworking', '~> 2.6'
+  pod 'ORStackView', '~> 3.0'
+  pod 'SwiftyJSON', '~> 2.3'
+end
+target 'MyApp' do
+  pods
+end
+
+如果引入的包使用不了，则“product-clean”，”product-build”, 重启Xcode
+
+iOS 模拟器快捷键
+command 左右上下箭号 横屏竖屏
+shift+cmd+h  home键
+
+1.打开iOS模拟器，选择Hardware菜单。
+
+2.选中Keyboard，将其中的第二项Connect Hardware Keyboard 选中状态去掉。OK
+
+
+快捷键
+"Clean" from Xcode (Shift+Cmd+K)
+"Clean Build Folder" from Xcode (Option+Shift+Command+K)
+Quit Xcode
+Delete the Derived Data directory (~/Library/Developer/Xcode/DerivedData)
+Launch Xcode and "Build".
+command + option + =  添加约束后改变显示效果
+
+
+Command+Shift+H       模拟器的Home键
+
+
+
+
+
+
+
+

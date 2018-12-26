@@ -1,0 +1,35 @@
+npm更新npm update -g npm
+npm卸载sudo npm uninstall npm -g
+升级react native版本库：
+npm install --save react-native@0.34 最新版本号
+react-native upgrade
+
+打包jsbundle
+react-native bundle --entry-file index.android.js --bundle-output ./bundle/index.android.bundle --platform android --assets-dest ./bundle --dev false
+
+1、react native 运行项目时，应该先关掉bash和模拟器，重新运行即可。否则，即使你点击的是当前项目的运行按钮，运行的也会是上一次运行的项目。或者在终端里重新启动packager，即npm start（没有试验）
+
+
+react native
+
+1、iOS真机测试
+
+2、在android中，出现unbable to download js bundle:解决方案一、在Dev Settings总设置你的局域网IP。解决方案二、curl ‘http://localhost:8081/index.android.bundle?platform=android&dev=true&minify=false' -o android/app/src/main/assets/index.android.bundle
+
+3、IOS的图片放在Images.xcassets中，android图片放在res中，和原生的一样
+
+
+
+react中可使用的相关包
+immutable.js：弥补js中没有不可变数据结构的问题
+lodash.js：数据的转换、匹配、查找等，例如求最小，toString类似
+moment.js：支持字符串、Date、时间戳以及数组等格式，格式化日期时间，计算相对时间，获取特定时间后的日期时间等等
+reflux：Reflux是根据React的flux创建的单向数据流类库。Reflux的单向数据流模式主要由actions和stores组成
+https://github.com/reflux/refluxjs
+
+
+node server.js
+偏好设置-高级-开发菜单
+
+
+nvm install stable nvm是node管理工具，这个命令行用于更新node版本

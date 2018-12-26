@@ -1,0 +1,11 @@
+scp -P2222 pso@10.100.31.160:/usr/local/nginx/appdownload/download/index.html  /Users/zengjing/Desktop
+
+从服务器拉取文件到本地，地址1为服务器地址，要加pso@，地址2为本地地址
+
+scp -P2222 /Users/penglei3/Documents/学贷/app/test_update.apk pso@10.100.31.160:/usr/local/nginx/html
+
+将本地文件上传到服务器
+
+cp /Users/zengjing/Downloads/genymotion_vbox86p_7.0_161206_183248.ova /usr/wang/
+
+pwd 当前目录路径
